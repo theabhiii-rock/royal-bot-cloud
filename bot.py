@@ -47,6 +47,7 @@ PROMO_CODE = "RBETKING"
 SUPPORT_USERNAME = "@Royal_BetKing"
 SUPPORT_URL = f"https://t.me/{SUPPORT_USERNAME.lstrip('@')}"
 CHANNEL_URL = "https://t.me/Royal_Bet_King"
+APK_DOWNLOAD_URL = "https://royal-app-3l7c.onrender.com/download-apk"
 
 # Session state & Telegram file_id cache for 0.05s instant photo delivery
 user_data = {}
@@ -98,6 +99,12 @@ def get_main_keyboard():
         ],
         [
             InlineKeyboardButton(
+                "📲 DOWNLOAD PREDICTOR APK",
+                url=APK_DOWNLOAD_URL,
+            )
+        ],
+        [
+            InlineKeyboardButton(
                 "📖 STEP-BY-STEP REGISTRATION GUIDE",
                 callback_data="guide",
             )
@@ -135,9 +142,10 @@ def get_welcome_caption(first_name: str) -> str:
         "Unlock <b>99.4% Accurate VIP Aviator Signals</b> & claim your <b>+500% Welcome Bonus</b> in 3 easy steps:\n\n"
         "1️⃣ <b>Register</b> a new 1win account using the button below\n"
         f"2️⃣ Enter Official Promo Code: <code>{PROMO_CODE}</code> <i>(Tap to copy)</i>\n"
-        "3️⃣ Deposit & <b>send your 1win User ID</b> here to activate Predictor! 🚀\n\n"
+        "3️⃣ Deposit, download the <b>Aviator Predictor APK</b> & send your User ID to activate! 🚀\n\n"
         "━━━━━━━━━━━━━━━━━━━━━━\n"
         f"🎁 <b>Bonus Code:</b> <code>{PROMO_CODE}</code> <i>(+500% First Deposit)</i>\n"
+        f"📲 <b>Predictor App:</b> <a href=\"{APK_DOWNLOAD_URL}\">Download APK</a>\n"
         "👇 <b>Tap a button below or send your 1win ID directly:</b>"
     )
 
@@ -291,6 +299,12 @@ async def guide_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 ],
                 [
                     InlineKeyboardButton(
+                        "📲 DOWNLOAD PREDICTOR APK",
+                        url=APK_DOWNLOAD_URL,
+                    )
+                ],
+                [
+                    InlineKeyboardButton(
                         f"🎟️ PROMO: {PROMO_CODE}",
                         callback_data="promo",
                     ),
@@ -379,6 +393,12 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             ],
             [
                 InlineKeyboardButton(
+                    "📲 DOWNLOAD PREDICTOR APK",
+                    url=APK_DOWNLOAD_URL,
+                )
+            ],
+            [
+                InlineKeyboardButton(
                     "📖 HOW TO REGISTER & DEPOSIT",
                     callback_data="guide",
                 )
@@ -433,6 +453,12 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = InlineKeyboardMarkup([
         [
             InlineKeyboardButton(
+                "📲 DOWNLOAD PREDICTOR APK",
+                url=APK_DOWNLOAD_URL,
+            )
+        ],
+        [
+            InlineKeyboardButton(
                 "📢 JOIN VIP TELEGRAM CHANNEL",
                 url=CHANNEL_URL,
             )
@@ -471,8 +497,10 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "🎁 <b>Bonus Status:</b> <b>+500% Active</b>\n\n"
         "━━━━━━━━━━━━━━━━━━━━━━\n"
         "🚀 <b>NEXT STEPS TO UNLOCK SIGNALS:</b>\n\n"
-        "1️⃣ <b>Join Official VIP Channel:</b> Tap button below for daily live signals & winning proofs!\n"
-        "2️⃣ <b>Activate Personal Predictor:</b> Send your ID & Deposit Screenshot to VIP Support to start receiving rounds! 👇\n\n"
+        "1️⃣ <b>Install App:</b> Tap <b>DOWNLOAD PREDICTOR APK</b> below to install the official app!\n"
+        "2️⃣ <b>Join VIP Channel:</b> Tap button below for daily live signals & proofs!\n"
+        "3️⃣ <b>Activate VIP Access:</b> Send your ID & Deposit Screenshot to VIP Support to start receiving rounds! 👇\n\n"
+        f"📲 <b>Download APK:</b> {APK_DOWNLOAD_URL}\n"
         f"📢 <b>VIP Channel:</b> {CHANNEL_URL}\n"
         f"👤 <b>VIP Manager:</b> {SUPPORT_USERNAME}"
     )
@@ -554,6 +582,42 @@ async def stats_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(f"Stats error: {e}")
 
 
+async def apk_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.message is None:
+        return
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton(
+                "📲 CLICK HERE TO DOWNLOAD APK",
+                url=APK_DOWNLOAD_URL,
+            )
+        ],
+        [
+            InlineKeyboardButton(
+                "📢 JOIN VIP CHANNEL",
+                url=CHANNEL_URL,
+            ),
+            InlineKeyboardButton(
+                "💬 VIP SUPPORT",
+                url=SUPPORT_URL,
+            ),
+        ],
+    ])
+    await update.message.reply_text(
+        "📲 <b>OFFICIAL AVIATOR PREDICTOR APK</b>\n"
+        "━━━━━━━━━━━━━━━━━━━━━━\n\n"
+        "Download the official v4.2 VIP Predictor application for Android:\n\n"
+        f"👉 <a href=\"{APK_DOWNLOAD_URL}\"><b>Tap Here to Download APK</b></a>\n\n"
+        "✅ <b>App Highlights:</b>\n"
+        "• 99.4% Accurate Round Multipliers\n"
+        "• Live Auto-Cashout Alerts\n"
+        "• Real-time 1win Sync\n\n"
+        f"<i>Install APK, register with promo code</i> <code>{PROMO_CODE}</code> <i>and send your User ID here to activate!</i>",
+        parse_mode="HTML",
+        reply_markup=keyboard,
+    )
+
+
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE):
     print(f"ERROR: {context.error}")
 
@@ -578,6 +642,8 @@ def main():
     app.add_handler(CommandHandler("cancel", cancel))
     app.add_handler(CommandHandler("help", help_command))
     app.add_handler(CommandHandler("stats", stats_command))
+    app.add_handler(CommandHandler("apk", apk_command))
+    app.add_handler(CommandHandler("download", apk_command))
 
     app.add_handler(CallbackQueryHandler(start, pattern="^main_menu$"))
     app.add_handler(CallbackQueryHandler(promo_callback, pattern="^promo$"))
