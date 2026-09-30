@@ -46,6 +46,7 @@ REGISTRATION_LINK = "https://one-vv4926.com/?open=register&p=4ej1"
 PROMO_CODE = "RBETKING"
 SUPPORT_USERNAME = "@Royal_BetKing"
 SUPPORT_URL = f"https://t.me/{SUPPORT_USERNAME.lstrip('@')}"
+CHANNEL_URL = "https://t.me/Royal_Bet_King"
 
 # Session state & Telegram file_id cache for 0.05s instant photo delivery
 user_data = {}
@@ -110,6 +111,12 @@ def get_main_keyboard():
                 "🆔 SUBMIT USER ID",
                 callback_data="enter_id",
             ),
+        ],
+        [
+            InlineKeyboardButton(
+                "📢 OFFICIAL VIP CHANNEL",
+                url=CHANNEL_URL,
+            )
         ],
         [
             InlineKeyboardButton(
@@ -426,6 +433,12 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = InlineKeyboardMarkup([
         [
             InlineKeyboardButton(
+                "📢 JOIN VIP TELEGRAM CHANNEL",
+                url=CHANNEL_URL,
+            )
+        ],
+        [
+            InlineKeyboardButton(
                 "👑 ACTIVATE VIP SIGNALS (MESSAGE SUPPORT)",
                 url=SUPPORT_URL,
             )
@@ -457,8 +470,10 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "📡 <b>Predictor Server:</b> <code>CONNECTED (v4.2 VIP)</code>\n"
         "🎁 <b>Bonus Status:</b> <b>+500% Active</b>\n\n"
         "━━━━━━━━━━━━━━━━━━━━━━\n"
-        "🚀 <b>FINAL STEP TO UNLOCK SIGNALS:</b>\n\n"
-        "Tap <b>ACTIVATE VIP SIGNALS</b> below and send your <b>1win ID & Deposit Screenshot</b> to our VIP Support Manager to start playing! 👇\n\n"
+        "🚀 <b>NEXT STEPS TO UNLOCK SIGNALS:</b>\n\n"
+        "1️⃣ <b>Join Official VIP Channel:</b> Tap button below for daily live signals & winning proofs!\n"
+        "2️⃣ <b>Activate Personal Predictor:</b> Send your ID & Deposit Screenshot to VIP Support to start receiving rounds! 👇\n\n"
+        f"📢 <b>VIP Channel:</b> {CHANNEL_URL}\n"
         f"👤 <b>VIP Manager:</b> {SUPPORT_USERNAME}"
     )
 
