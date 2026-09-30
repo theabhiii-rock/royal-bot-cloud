@@ -1,0 +1,46 @@
+name: 24/7 Cloud Bot Runner
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "*/20 * * * *"
+
+concurrency:
+  group: royal-aviator-bot-24-7
+  cancel-in-progress: false
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Telegram Bot (24/7 Continuous Cycle)
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        run: |
+          timeout 19500 python bot.py || true
+
+      - name: Trigger Next 24/7 Cycle Immediately
+        if: always()
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          curl -s -X POST \
+            -H "Authorization: Bearer $GH_PAT" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/theabhiii-rock/royal-bot-cloud/actions/workflows/run-bot.yml/dispatches \
+            -d '{"ref":"main"}'
