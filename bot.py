@@ -791,6 +791,47 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
 
+async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Downloads and saves any images sent to the bot, auto-assigning them if captioned."""
+    if update.message is None or not update.message.photo:
+        return
+    chat_id = update.effective_chat.id
+    raw_caption = (update.message.caption or "").strip()
+    caption = raw_caption.lower()
+    photo = update.message.photo[-1]  # Highest resolution
+
+    file = await photo.get_file()
+    file_id = photo.file_id
+
+    # Determine target filename
+    if caption:
+        clean_name = re.sub(r"[^a-z0-9_]", "", caption)
+        if not clean_name.endswith(".jpg"):
+            target_name = f"{clean_name}.jpg"
+        else:
+            target_name = clean_name
+    else:
+        target_name = f"uploaded_{photo.file_unique_id}.jpg"
+
+    await file.download_to_drive(target_name)
+
+    # Invalidate cache so it serves immediately
+    PHOTO_CACHE.pop(target_name, None)
+
+    reply_text = (
+        f"📸 <b>IMAGE RECEIVED & SAVED!</b>\n"
+        f"━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"💾 Saved as: <code>{target_name}</code>\n\n"
+        f"💡 <i>Tip: Send images with caption to auto-assign:</i>\n"
+        f"• <code>step2_pt</code> (Step 1 Registration for Portuguese)\n"
+        f"• <code>step3_pt</code> (Step 2 Deposit for Portuguese)\n"
+        f"• <code>step4_pt</code> (Step 3 Confirm for Portuguese)\n"
+        f"• <code>banner_pt</code> (Banner for Portuguese)\n"
+        f"<i>(Use suffixes: _pt, _tr, _th, _es, _de, _fr, _en)</i>"
+    )
+    await update.message.reply_text(reply_text, parse_mode="HTML")
+
+
 # =========================================================
 # CANCEL & HELP & STATS
 # =========================================================
@@ -962,6 +1003,7 @@ def main():
     app.add_handler(CallbackQueryHandler(change_id_callback, pattern="^change_id$"))
 
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+    app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
     app.add_error_handler(error_handler)
 
     print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
