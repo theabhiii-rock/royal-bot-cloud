@@ -53,6 +53,12 @@ LANGUAGES = {
         "flag": "🇩🇪",
         "channel": "https://t.me/Royal_Bet_King6",
     },
+    "zh": {
+        "code": "zh",
+        "name": "中文 (Mandarin)",
+        "flag": "🇨🇳",
+        "channel": "https://t.me/Royal_Bet_King",
+    },
 }
 
 DEFAULT_LANG = "hi"
@@ -949,6 +955,110 @@ STRINGS = {
             "━━━━━━━━━━━━━━━━━━━━━━\n"
             "① Einzahlung abschließen\n"
             "② Sobald bestätigt, <b>senden Sie Ihre 1win-ID hierher</b>, um die Live-Signale zu starten! 🚀"
+        ),
+    },
+    # =========================================================
+    # 🇨🇳 MANDARIN CHINESE
+    # =========================================================
+    "zh": {
+        "lang_name": "中文",
+        "welcome": (
+            "👑 <b>皇家飞行员VIP精准预测器 • v4.2 PRO</b>\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "👋 欢迎，<b>{first_name}</b>！\n\n"
+            "🟢 <b>系统状态：</b> 联机已同步\n"
+            "⚡ <b>信号准确率：</b> 99.4% 精确倍数\n"
+            "🎁 <b>VIP首充红利：</b> +500% 独家奖励\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🚀 <b>只需3个简单步骤即可激活：</b>\n"
+            "1️⃣ 点击下方 <b>在 1WIN 注册</b> 创建新账户\n"
+            "2️⃣ Promo Code 优惠码：<code>{promo_code}</code> <i>(点击复制)</i>\n"
+            "3️⃣ 完成充值并在此发送您的 <b>1win 用户ID</b>！ ✅\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🎟️ <b>专属优惠码：</b> <code>{promo_code}</code>\n"
+            "📲 <b>预测器应用：</b> <a href=\"{apk_url}\">点击下载 APK</a>\n\n"
+            "👇 <b>点击下方按钮或直接发送您的 1win ID：</b>"
+        ),
+        "btn_register": "🚀 在 1WIN 注册 (+500% 红利)",
+        "btn_apk": "📲 下载预测器 APK",
+        "btn_guide": "📖 新手图文指引",
+        "btn_promo": "🎟️ 复制优惠码",
+        "btn_enter_id": "🆔 提交 1WIN ID",
+        "btn_channel": "📢 官方 VIP 频道",
+        "btn_support": "💬 24/7 VIP 客服",
+        "btn_lang": "🌐 切换语言 / LANGUAGE",
+        "btn_change_id": "🔄 更换 ID",
+        "btn_main_menu": "🏠 主菜单",
+        "btn_try_again": "🔄 重试",
+        "btn_activate_signals": "👑 联系客服激活 VIP 信号",
+        "btn_deposit_guide": "💳 充值指南",
+        "promo_copied_toast": "优惠码: {promo_code} (已复制!)",
+        "promo_details": (
+            "🎟️ <b>官方 VIP 专属优惠码</b>\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n\n"
+            "👉  <code>{promo_code}</code>  👈\n\n"
+            "<i>(点击代码即可复制!)</i>\n\n"
+            "✅ <b>VIP 特权：</b>\n"
+            "• 首次充值立享 <b>+500% 欢迎红利</b>\n"
+            "• 与 <b>Royal Aviator Predictor</b> 实时同步\n"
+            "• 极速优先提现通道"
+        ),
+        "enter_id_prompt": (
+            "🆔 <b>发送您的 1WIN 用户 ID</b>\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "请在此输入并发送您的 <b>6 至 12 位 1win 账号 ID</b>。\n\n"
+            "📌 <i>示例：</i> <code>85492018</code>\n\n"
+            "👇 <b>请在下方输入框中直接发送：</b>"
+        ),
+        "step1": (
+            "📝 <b>第 1 步（共 3 步）：快速注册与优惠码</b>\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "① 点击下方按钮打开 1win 注册页面\n"
+            "② 选择币种并输入您的<b>手机号与邮箱</b>\n"
+            "③ 在<b>优惠码（PROMO CODE）</b>栏填入：<code>{promo_code}</code>\n"
+            "④ 点击 <b>注册（Register）</b> 按钮。"
+        ),
+        "step2": (
+            "💳 <b>第 2 步（共 3 步）：选择充值方式</b>\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "① 点击右上角绿色的 <b>充值（Deposit）</b> 按钮\n"
+            "② 选择您偏好的支付方式：<b>USDT / 银行卡 / 电子钱包</b>\n"
+            "③ 激活 VIP 信号的推荐充值金额：<b>10 USDT 以上</b>。"
+        ),
+        "step3": (
+            "✅ <b>第 3 步（共 3 步）：确认充值并激活 VIP</b>\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "① 完成充值支付\n"
+            "② 账户余额到账后，<b>在此聊天中发送您的 1win 用户 ID</b>\n"
+            "③ 您的 VIP 预测器将立即自动激活！ 🚀"
+        ),
+        "verified": (
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "✅ <b>账户验证成功！</b>\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n\n"
+            "🆔 <b>您的 1win ID：</b> <code>{user_id}</code>\n"
+            "🟢 <b>同步状态：</b> 已成功连接预测器系统\n"
+            "⚡ <b>VIP 信号精准度：</b> 99.4%\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🚀 <b>如何开始盈利：</b>\n"
+            "1️⃣ 打开 1win 平台上的 <b>Aviator</b> 游戏\n"
+            "2️⃣ 保持此聊天窗口开启或下载 APK\n"
+            "3️⃣ 按照实时信号倍数自动兑现获利！ 💰\n\n"
+            "👇 <b>点击下方按钮进入官方 VIP 频道获取实时信号：</b>"
+        ),
+        "rejected": (
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "❌ <b>账户未验证！</b>\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n\n"
+            "🆔 <b>输入的 ID：</b> <code>{user_id}</code>\n\n"
+            "⚠️ <b>该 ID 未通过我们的官方链接或优惠码 ({promo_code}) 注册！</b>\n\n"
+            "VIP 预测器与 99.4% 精准信号仅与通过官方邀请链接创建的账户同步。\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🚀 <b>如何正确激活：</b>\n"
+            "1️⃣ 点击下方 <b>在 1WIN 注册</b> 按钮\n"
+            "2️⃣ 创建新账户时务必填写优惠码 <code>{promo_code}</code>\n"
+            "3️⃣ 完成首充并在此发送您的新 ID，即可秒级验证！ ✅\n\n"
+            "<i>如果您确已通过我们链接注册，请联系客服：</i> {support_username}"
         ),
     },
 }

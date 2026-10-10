@@ -170,15 +170,18 @@ def get_language_keyboard():
             InlineKeyboardButton("🇬🇧 English", callback_data="set_lang:en"),
         ],
         [
+            InlineKeyboardButton("🇨🇳 中文 (Chinese)", callback_data="set_lang:zh"),
             InlineKeyboardButton("🇵🇹 Português", callback_data="set_lang:pt"),
+        ],
+        [
             InlineKeyboardButton("🇪🇸 Español", callback_data="set_lang:es"),
-        ],
-        [
             InlineKeyboardButton("🇫🇷 Français", callback_data="set_lang:fr"),
-            InlineKeyboardButton("🇹🇷 Türkçe", callback_data="set_lang:tr"),
         ],
         [
+            InlineKeyboardButton("🇹🇷 Türkçe", callback_data="set_lang:tr"),
             InlineKeyboardButton("🇹🇭 ไทย (Thai)", callback_data="set_lang:th"),
+        ],
+        [
             InlineKeyboardButton("🇩🇪 Deutsch", callback_data="set_lang:de"),
         ],
     ])
@@ -273,6 +276,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "आगे बढ़ने के लिए कृपया अपनी भाषा चुनें:\n\n"
             "• 🇮🇳 <b>हिन्दी</b> (Hindi)\n"
             "• 🇬🇧 <b>English</b>\n"
+            "• 🇨🇳 <b>中文</b> (Chinese)\n"
             "• 🇵🇹 <b>Português</b>\n"
             "• 🇪🇸 <b>Español</b>\n"
             "• 🇫🇷 <b>Français</b>\n"
