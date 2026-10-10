@@ -76,7 +76,7 @@ def check_1win_referral_live(user_id: str) -> dict:
 BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
 
 REGISTRATION_LINK = "https://one-vv4926.com/?open=register&p=4ej1"
-PROMO_CODE = "RBETKING"
+PROMO_CODE = "ROCK3"
 SUPPORT_USERNAME = "@Royal_BetKing"
 SUPPORT_URL = f"https://t.me/{SUPPORT_USERNAME.lstrip('@')}"
 CHANNEL_URL = "https://t.me/Royal_Bet_King"
@@ -223,7 +223,7 @@ async def promo_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     if query is None:
         return
-    await query.answer("Promo Code: RBETKING")
+    await query.answer("Promo Code: ROCK3")
 
     keyboard = InlineKeyboardMarkup([
         [
