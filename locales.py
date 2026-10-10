@@ -57,7 +57,7 @@ LANGUAGES = {
         "code": "zh",
         "name": "中文 (Mandarin)",
         "flag": "🇨🇳",
-        "channel": "https://t.me/Royal_Bet_King",
+        "channel": "https://t.me/Royal_Bet_King7",
     },
 }
 
