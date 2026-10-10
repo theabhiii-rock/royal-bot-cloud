@@ -9,7 +9,7 @@ on:
 
 concurrency:
   group: royal-aviator-bot-24-7
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   run-bot:

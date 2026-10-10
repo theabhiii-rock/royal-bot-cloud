@@ -28,11 +28,18 @@ def init_db():
                 telegram_username TEXT,
                 first_name TEXT,
                 user_id TEXT,
+                language TEXT DEFAULT 'hi',
                 state TEXT NOT NULL DEFAULT 'waiting_for_id',
                 created_at TEXT NOT NULL,
                 updated_at TEXT NOT NULL
             )
         """)
+
+        # Add language column if migrating existing database
+        try:
+            conn.execute("ALTER TABLE users ADD COLUMN language TEXT DEFAULT 'hi'")
+        except Exception:
+            pass
 
         conn.commit()
 
@@ -53,32 +60,38 @@ def get_user(chat_id):
         conn.close()
 
 
-def create_or_update_user(chat_id, username, first_name):
+def create_or_update_user(chat_id, username, first_name, language=None):
     now = get_now()
-
     conn = get_connection()
 
     try:
+        # Check existing user
+        existing = conn.execute("SELECT language FROM users WHERE chat_id = ?", (chat_id,)).fetchone()
+        user_lang = language or (existing["language"] if existing and existing["language"] else None)
+
         conn.execute("""
             INSERT INTO users (
                 chat_id,
                 telegram_username,
                 first_name,
                 user_id,
+                language,
                 state,
                 created_at,
                 updated_at
             )
-            VALUES (?, ?, ?, NULL, 'waiting_for_id', ?, ?)
+            VALUES (?, ?, ?, NULL, ?, 'waiting_for_id', ?, ?)
 
             ON CONFLICT(chat_id) DO UPDATE SET
                 telegram_username = excluded.telegram_username,
                 first_name = excluded.first_name,
+                language = COALESCE(excluded.language, users.language),
                 updated_at = excluded.updated_at
         """, (
             chat_id,
             username,
             first_name,
+            user_lang,
             now,
             now
         ))
@@ -89,9 +102,37 @@ def create_or_update_user(chat_id, username, first_name):
         conn.close()
 
 
+def set_user_language(chat_id, language):
+    now = get_now()
+    conn = get_connection()
+
+    try:
+        conn.execute("""
+            UPDATE users
+            SET language = ?, updated_at = ?
+            WHERE chat_id = ?
+        """, (language, now, chat_id))
+        conn.commit()
+
+    finally:
+        conn.close()
+
+
+def get_user_language(chat_id) -> str:
+    conn = get_connection()
+
+    try:
+        row = conn.execute("SELECT language FROM users WHERE chat_id = ?", (chat_id,)).fetchone()
+        if row and row["language"]:
+            return row["language"]
+        return "hi"
+
+    finally:
+        conn.close()
+
+
 def update_user_id(chat_id, user_id):
     now = get_now()
-
     conn = get_connection()
 
     try:
@@ -116,7 +157,6 @@ def update_user_id(chat_id, user_id):
 
 def update_state(chat_id, state):
     now = get_now()
-
     conn = get_connection()
 
     try:
